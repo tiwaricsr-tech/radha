@@ -141,9 +141,9 @@ export function getSavedCustomerUser() {
 export function getAdminDashboardUrl(explicitToken = null) {
   const tok = explicitToken || getActiveToken();
   if (tok && tok !== 'null' && tok !== 'undefined') {
-    return `/admin-app/?sso_token=${encodeURIComponent(tok)}`;
+    return `/admin/?sso_token=${encodeURIComponent(tok)}`;
   }
-  return '/admin-app/';
+  return '/admin/';
 }
 
 export function navigateToAdminDashboard(explicitToken = null) {
