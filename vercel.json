@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "npm install --prefix customer-frontend && npm install --prefix admin-dashboard && npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/**/*.js": { "includeFiles": "lib/**" },
+    "uploads/**/*.js": { "includeFiles": "lib/**" }
+  },
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin/index.html" },
+    { "source": "/((?!api/|uploads/|admin/).*)", "destination": "/index.html" }
+  ]
+}

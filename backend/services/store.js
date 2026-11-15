@@ -89,7 +89,10 @@ function loadLocalDb() {
 }
 
 async function initDataStore() {
-  const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/shree_mithai_shop';
+  const uri = process.env.MONGO_URI || (process.env.NODE_ENV === 'production' ? '' : 'mongodb://127.0.0.1:27017/shree_mithai_shop');
+  if (!uri) {
+    throw new Error('MONGO_URI must be configured in production. Refusing to start with temporary local-file storage.');
+  }
   try {
     await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 });
     await ensureUserEmailIndex();
@@ -107,7 +110,10 @@ async function initDataStore() {
       await Review.insertMany(seed.reviews.map(({ _id, ...rest }) => rest));
       console.log('🌱 Seeded MongoDB with initial Radha Swami catalog.');
     }
-  } catch (_err) {
+  } catch (err) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(`MongoDB connection is required in production: ${err.message}`);
+    }
     useMongo = false;
     loadLocalDb();
     console.log(
