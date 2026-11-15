@@ -1,0 +1,19 @@
+{
+  "name": "shree-mithai-backend",
+  "version": "1.0.0",
+  "description": "Backend API + Real-Time Socket.IO Server for Radha Swami E-Commerce System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "google-auth-library": "^9.14.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.1",
+    "socket.io": "^4.8.1"
+  }
+}

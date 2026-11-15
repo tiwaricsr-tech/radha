@@ -1,0 +1,21 @@
+# Dependencies and generated builds
+**/node_modules/
+**/dist/
+**/public-build/
+coverage/
+*.log
+npm-debug.log*
+
+# Local secrets
+**/.env
+**/.env.*
+!backend/.env.example
+backend/.env.*.tmp
+
+# Local customer/order data
+backend/data/*.json
+
+# Unrelated workspace contents
+/uploads/
+/Unselected files/
+/package-lock.json
