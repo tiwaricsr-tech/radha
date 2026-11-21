@@ -1,14 +1,25 @@
 {
-  "version": 2,
-  "buildCommand": "npm install --prefix customer-frontend && npm install --prefix admin-dashboard && npm run build",
-  "outputDirectory": "dist",
-  "functions": {
-    "api/**/*.js": { "includeFiles": "lib/**" },
-    "uploads/**/*.js": { "includeFiles": "lib/**" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "admin-dashboard": {
+      "root": "admin-dashboard",
+      "framework": "vite"
+    },
+    "radha-swami-backend": {
+      "root": "backend",
+      "framework": "express",
+      "buildCommand": "npm install"
+    },
+    "customer-frontend": {
+      "root": "customer-frontend",
+      "framework": "vite"
+    }
   },
   "rewrites": [
-    { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/:path*", "destination": "/admin/index.html" },
-    { "source": "/((?!api/|uploads/|admin/).*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "radha-swami-backend"
+      }
+    }
   ]
-}
